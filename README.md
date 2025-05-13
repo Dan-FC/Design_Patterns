@@ -4,7 +4,7 @@ Este proyecto permite consultar las ligas de fútbol de un país utilizando la A
 
 ---
 
-## 🧠 Patrones de Diseño Aplicados
+## Patrones de Diseño Aplicados
 
 Se utilizaron los siguientes patrones de diseño en el proyecto:
 
@@ -42,3 +42,86 @@ Se utilizaron los siguientes patrones de diseño en el proyecto:
 
 ![Tabla](images/tabla.png)
 ![Tabla](images/grafica.png)
+
+## Diagrama de clases en UML
+
+```mermaid
+classDiagram
+
+%% Factory Method
+class Endpoint {
+    <<interface>>
+    +get_data(**kwargs)
+}
+
+class LeaguesEndpoint {
+    +get_data(country)
+    -base_url
+    -api_key
+}
+
+class EndpointFactory {
+    +create_endpoint(name)
+}
+
+Endpoint <|.. LeaguesEndpoint
+EndpointFactory --> Endpoint
+
+%% Strategy
+class DisplayStrategy {
+    <<interface>>
+    +display(data)
+}
+
+class TableDisplayStrategy {
+    +display(data)
+}
+
+class BarChartDisplayStrategy {
+    +display(data)
+}
+
+DisplayStrategy <|.. TableDisplayStrategy
+DisplayStrategy <|.. BarChartDisplayStrategy
+
+%% Observer
+class CountrySelection {
+    +attach(observer)
+    +set_country(name)
+    +notify()
+    -country
+    -observers
+}
+
+class MainApp {
+    +update(country)
+}
+
+CountrySelection --> MainApp : observes
+
+%% Decorator
+class DisplayDecorator {
+    <<abstract>>
+    +display(data)
+}
+
+class ExportToExcelDecorator {
+    +display(data)
+    -wrapped
+}
+
+DisplayStrategy <|-- DisplayDecorator
+DisplayDecorator <|-- ExportToExcelDecorator
+ExportToExcelDecorator --> DisplayStrategy : wraps
+
+%% main.py relaciones
+class main.py {
+    +country_input
+    +strategy.display(data)
+    +endpoint.get_data(country)
+}
+
+main.py --> EndpointFactory
+main.py --> DisplayStrategy
+main.py --> CountrySelection
+```
