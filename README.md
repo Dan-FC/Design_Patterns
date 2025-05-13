@@ -1,4 +1,4 @@
-# Ptrones de Diseño: Visualización de Ligas de Fútbol por País
+# Patrones de Diseño: Visualización de Ligas de Fútbol por País
 
 Este proyecto permite consultar las ligas de fútbol de un país utilizando la API de Football-Data y mostrarlas en una interfaz construida con Streamlit. Además, el sistema está diseñado utilizando patrones de diseño para facilitar su escalabilidad y mantenimiento.
 
