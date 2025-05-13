@@ -39,3 +39,6 @@ Se utilizaron los siguientes patrones de diseño en el proyecto:
 - **Solución aplicada:** Se implementó `ExcelExportDecorator`, que extiende una estrategia de visualización añadiendo la capacidad de descargar los datos como archivo Excel.
 
 ---
+
+![Tabla](images/tabla.png)
+![Tabla](images/grafica.png)
